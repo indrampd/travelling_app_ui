@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Card Section
                 _buildCardDestination(size),
                 // Card Section 2
-                _buildGroupCardDestination(size),
+                _buildGroupCard(size),
               ],
             ),
           ],
@@ -485,7 +485,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  _buildGroupCardDestination(Size size) {
+  _buildGroupCard(Size size) {
     return Column(
       children: [
         Container(
@@ -538,17 +538,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     margin: const EdgeInsets.only(top: 20),
                     padding: const EdgeInsets.all(10),
-                    height: 160,
+                    height: 180,
                     width: 360,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
+                          color: Colors.grey.withOpacity(0.1),
                           spreadRadius: 1,
-                          blurRadius: 20,
-                          offset: const Offset(0, 15),
+                          blurRadius: 5,
+                          offset: const Offset(0, 5),
                         ),
                       ],
                     ),
@@ -563,10 +563,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.3),
+                                color: Colors.blueAccent.withOpacity(0.2),
                                 spreadRadius: 1,
-                                blurRadius: 20,
-                                offset: const Offset(0, 15),
+                                blurRadius: 10,
+                                offset: const Offset(5, 0),
                               ),
                             ],
                           ),
@@ -646,7 +646,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                                 Expanded(
-                                  flex: 1,
+                                  flex: 2,
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -698,8 +698,149 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Expanded(
                                   flex: 2,
-                                  child: Container(
-                                    color: Colors.green,
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: Container(
+                                          // color: Colors.amber,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Stack(
+                                                    children: [
+                                                      Container(
+                                                        margin: const EdgeInsets
+                                                            .only(left: 60),
+                                                        child: CircleAvatar(
+                                                          radius: 14,
+                                                          backgroundColor:
+                                                              Colors.white,
+                                                          child: CircleAvatar(
+                                                            radius: 12,
+                                                            backgroundImage:
+                                                                AssetImage(
+                                                              tour.imageUrl,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        margin: const EdgeInsets
+                                                            .only(left: 40),
+                                                        child: CircleAvatar(
+                                                          radius: 14,
+                                                          backgroundColor:
+                                                              Colors.white,
+                                                          child: CircleAvatar(
+                                                            radius: 12,
+                                                            backgroundImage:
+                                                                AssetImage(
+                                                              tour.imageUrl,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        margin: const EdgeInsets
+                                                            .only(left: 20),
+                                                        child: CircleAvatar(
+                                                          radius: 14,
+                                                          backgroundColor:
+                                                              Colors.white,
+                                                          child: CircleAvatar(
+                                                            radius: 12,
+                                                            backgroundImage:
+                                                                AssetImage(
+                                                              tour.imageUrl,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      CircleAvatar(
+                                                        radius: 14,
+                                                        backgroundColor:
+                                                            Colors.white,
+                                                        child: CircleAvatar(
+                                                          radius: 12,
+                                                          backgroundImage:
+                                                              AssetImage(
+                                                            tour.imageUrl,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                    '${tour.groupSize.toString()}+',
+                                                    style: TextStyle(
+                                                      color: Colors
+                                                          .blueGrey.shade200,
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Text(
+                                                '${tour.groupSize.toString()}%',
+                                                style: const TextStyle(
+                                                  color: Colors.blueAccent,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Expanded(
+                                              child: Stack(
+                                                children: [
+                                                  Container(
+                                                    height: 4,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors
+                                                          .blueGrey.shade50,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    height: 4,
+                                                    // 70 %
+                                                    width: 200 *
+                                                        (tour.groupSize /
+                                                            tour.groupSizeMax),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.blueAccent,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
 
