@@ -14,6 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   int _currentIndex = 0;
   double sizeIcon = 25;
+  double totalWidthBar = 210;
   List<String> tabName = [
     'Lakes',
     'Jungle',
@@ -373,6 +374,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     Text(
                                       destination.name,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                       style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 12,
@@ -391,12 +394,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                           width: 16,
                                           color: Colors.blueGrey.shade400,
                                         ),
-                                        Text(
-                                          destination.country,
-                                          style: TextStyle(
-                                            color: Colors.blueGrey.shade400,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400,
+                                        Expanded(
+                                          child: Text(
+                                            destination.country,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              color: Colors.blueGrey.shade400,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -539,7 +546,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     margin: const EdgeInsets.only(top: 20),
                     padding: const EdgeInsets.all(10),
                     height: 180,
-                    width: 360,
+                    width: 370,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(30),
@@ -582,226 +589,244 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         // Description
                         Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.only(
-                              left: 5,
-                            ),
-                            height: 200,
+                          child: Padding(
                             padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              // color: Colors.blueAccent,
-                            ),
                             child: Column(
                               children: [
                                 Expanded(
-                                  flex: 2,
                                   child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
-                                      Expanded(
-                                        flex: 2,
-                                        child: Container(
-                                          alignment: Alignment.centerLeft,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                tour.name,
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              tour.name,
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
                                               ),
-                                              Text(
-                                                tour.group,
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              tour.group,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                color: Colors.blueGrey.shade400,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SvgPicture.asset(
+                                        'assets/icons/icons8-love-outline.svg',
+                                        height: 25,
+                                        width: 25,
+                                        color: Colors.blueGrey.shade400,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      // Starting Point
+                                      Flexible(
+                                        flex: 3,
+                                        child: Wrap(
+                                          crossAxisAlignment:
+                                              WrapCrossAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.radio_button_checked,
+                                              size: 16,
+                                              color: Colors.blueGrey.shade400,
+                                            ),
+                                            const SizedBox(width: 2),
+                                            Expanded(
+                                              child: Text(
+                                                tour.startingPoint,
                                                 style: TextStyle(
                                                   color:
                                                       Colors.blueGrey.shade400,
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.w400,
                                                 ),
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      Expanded(
+                                      // Center Point
+                                      Flexible(
                                         flex: 1,
-                                        child: Container(
-                                          alignment: Alignment.centerRight,
-                                          // color: Colors.lightBlue,
-                                          child: SvgPicture.asset(
-                                            'assets/icons/icons8-love-outline.svg',
-                                            height: 20,
-                                            width: 20,
-                                            color: Colors.blueGrey.shade400,
+                                        child: Center(
+                                          child: Text(
+                                            ' - - - -',
+                                            style: TextStyle(
+                                              color: Colors.blueGrey.shade200,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                            maxLines: 1,
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Icon(
-                                        Icons.radio_button_checked,
-                                        color: Colors.blueGrey.shade400,
-                                        size: 16,
-                                      ),
-                                      const SizedBox(
-                                        width: 2,
-                                      ),
-                                      Text(
-                                        tour.startingPoint,
-                                        style: TextStyle(
-                                          color: Colors.blueGrey.shade400,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      const Spacer(),
-                                      Text(
-                                        '- - - -',
-                                        style: TextStyle(
-                                          color: Colors.blueGrey.shade400,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      const Spacer(),
-                                      SvgPicture.asset(
-                                        'assets/icons/icons8-location-fill.svg',
-                                        height: 16,
-                                        color: Colors.blueAccent,
-                                      ),
-                                      const SizedBox(
-                                        width: 2,
-                                      ),
-                                      Text(
-                                        tour.endingPoint,
-                                        style: const TextStyle(
-                                          color: Colors.blueAccent,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
+                                      // Ending Point
+                                      Flexible(
+                                        flex: 3,
+                                        child: Wrap(
+                                          crossAxisAlignment:
+                                              WrapCrossAlignment.center,
+                                          children: [
+                                            SvgPicture.asset(
+                                              'assets/icons/icons8-location-fill.svg',
+                                              height: 16,
+                                              width: 16,
+                                              color: Colors.blueAccent,
+                                            ),
+                                            const SizedBox(width: 2),
+                                            Expanded(
+                                              child: Text(
+                                                tour.endingPoint,
+                                                style: const TextStyle(
+                                                  color: Colors.blueAccent,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                                maxLines: 1,
+                                                // textDirection:
+                                                //     TextDirection.rtl,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
                                 Expanded(
-                                  flex: 2,
+                                  flex: 1,
                                   child: Column(
                                     children: [
-                                      Expanded(
-                                        flex: 2,
-                                        child: Container(
-                                          // color: Colors.amber,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Row(
                                             children: [
-                                              Row(
+                                              Stack(
                                                 children: [
-                                                  Stack(
-                                                    children: [
-                                                      Container(
-                                                        margin: const EdgeInsets
-                                                            .only(left: 60),
-                                                        child: CircleAvatar(
-                                                          radius: 14,
-                                                          backgroundColor:
-                                                              Colors.white,
-                                                          child: CircleAvatar(
-                                                            radius: 12,
-                                                            backgroundImage:
-                                                                AssetImage(
-                                                              tour.imageUrl,
-                                                            ),
-                                                          ),
+                                                  Container(
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                            left: 60),
+                                                    child: CircleAvatar(
+                                                      radius: 14,
+                                                      backgroundColor:
+                                                          Colors.white,
+                                                      child: CircleAvatar(
+                                                        radius: 12,
+                                                        backgroundImage:
+                                                            AssetImage(
+                                                          tour.imageUrl,
                                                         ),
                                                       ),
-                                                      Container(
-                                                        margin: const EdgeInsets
-                                                            .only(left: 40),
-                                                        child: CircleAvatar(
-                                                          radius: 14,
-                                                          backgroundColor:
-                                                              Colors.white,
-                                                          child: CircleAvatar(
-                                                            radius: 12,
-                                                            backgroundImage:
-                                                                AssetImage(
-                                                              tour.imageUrl,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        margin: const EdgeInsets
-                                                            .only(left: 20),
-                                                        child: CircleAvatar(
-                                                          radius: 14,
-                                                          backgroundColor:
-                                                              Colors.white,
-                                                          child: CircleAvatar(
-                                                            radius: 12,
-                                                            backgroundImage:
-                                                                AssetImage(
-                                                              tour.imageUrl,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      CircleAvatar(
-                                                        radius: 14,
-                                                        backgroundColor:
-                                                            Colors.white,
-                                                        child: CircleAvatar(
-                                                          radius: 12,
-                                                          backgroundImage:
-                                                              AssetImage(
-                                                            tour.imageUrl,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
+                                                    ),
                                                   ),
-                                                  const SizedBox(
-                                                    width: 5,
+                                                  Container(
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                            left: 40),
+                                                    child: CircleAvatar(
+                                                      radius: 14,
+                                                      backgroundColor:
+                                                          Colors.white,
+                                                      child: CircleAvatar(
+                                                        radius: 12,
+                                                        backgroundImage:
+                                                            AssetImage(
+                                                          tour.imageUrl,
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ),
-                                                  Text(
-                                                    '${tour.groupSize.toString()}+',
-                                                    style: TextStyle(
-                                                      color: Colors
-                                                          .blueGrey.shade200,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w400,
+                                                  Container(
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                            left: 20),
+                                                    child: CircleAvatar(
+                                                      radius: 14,
+                                                      backgroundColor:
+                                                          Colors.white,
+                                                      child: CircleAvatar(
+                                                        radius: 12,
+                                                        backgroundImage:
+                                                            AssetImage(
+                                                          tour.imageUrl,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  CircleAvatar(
+                                                    radius: 14,
+                                                    backgroundColor:
+                                                        Colors.white,
+                                                    child: CircleAvatar(
+                                                      radius: 12,
+                                                      backgroundImage:
+                                                          AssetImage(
+                                                        tour.imageUrl,
+                                                      ),
                                                     ),
                                                   ),
                                                 ],
                                               ),
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
                                               Text(
-                                                '${tour.groupSize.toString()}%',
-                                                style: const TextStyle(
-                                                  color: Colors.blueAccent,
+                                                '${tour.groupSize.toString()}+',
+                                                style: TextStyle(
+                                                  color:
+                                                      Colors.blueGrey.shade200,
                                                   fontSize: 12,
-                                                  fontWeight: FontWeight.w500,
+                                                  fontWeight: FontWeight.w400,
                                                 ),
                                               ),
                                             ],
                                           ),
-                                        ),
+                                          Text(
+                                            '${(100 * tour.groupSize / tour.groupSizeMax).toStringAsFixed(0)}%',
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: const TextStyle(
+                                              color: Colors.blueAccent,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                       Expanded(
                                         child: Row(
@@ -823,10 +848,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ),
                                                   Container(
                                                     height: 4,
-                                                    // 70 %
-                                                    width: 200 *
-                                                        (tour.groupSize /
-                                                            tour.groupSizeMax),
+                                                    width: totalWidthBar *
+                                                        tour.groupSize /
+                                                        tour.groupSizeMax,
                                                     decoration: BoxDecoration(
                                                       color: Colors.blueAccent,
                                                       borderRadius:
@@ -843,8 +867,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ],
                                   ),
                                 ),
-
-                                // Sisi kanan
                               ],
                             ),
                           ),
