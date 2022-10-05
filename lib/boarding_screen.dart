@@ -132,7 +132,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
                             FontAwesomeIcons.arrowRightLong,
                             color: Colors.white,
                             size: 14,
-                          )
+                          ),
                         ],
                       ),
                     ),

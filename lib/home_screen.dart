@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:travelling_app/tour_detail_screen.dart';
 import 'package:travelling_app/models/destination_model.dart';
 import 'package:travelling_app/models/tour_model.dart';
 
@@ -37,13 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
     'assets/icons/icons8-lake-200.png',
     'assets/icons/icons8-forest-200.png',
     'assets/icons/icons8-mountain-200.png',
-  ];
-
-  List<IconData> icons = [
-    Icons.home,
-    Icons.search,
-    Icons.favorite,
-    Icons.person,
   ];
 
   @override
@@ -154,6 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  // Search Section
   _buildSearchSection() {
     return Container(
       margin: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 15),
@@ -225,6 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  // Tab Scroll Icon
   _buildTabIcon() {
     return SizedBox(
       height: 40,
@@ -296,9 +292,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ignore: todo
-  // TODO : Layouting With Expanded Widget
-
+  // Card Destination
   _buildCardDestination(Size size) {
     return SizedBox(
       height: 320,
@@ -320,8 +314,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.2),
                   spreadRadius: 1,
-                  blurRadius: 20,
-                  offset: const Offset(0, 15),
+                  blurRadius: 15,
+                  offset: const Offset(0, 10),
                 ),
               ],
             ),
@@ -345,16 +339,31 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image(
-                      image: AssetImage(
-                        destination.imageUrl,
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image(
+                          image: AssetImage(
+                            destination.imageUrl,
+                          ),
+                          width: 200,
+                          height: 140,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                      width: 200,
-                      height: 140,
-                      fit: BoxFit.cover,
-                    ),
+                      Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(20),
+                          onTap: () {},
+                          child: const SizedBox(
+                            width: 200,
+                            height: 140,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Expanded(
@@ -554,8 +563,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.1),
                           spreadRadius: 1,
-                          blurRadius: 5,
-                          offset: const Offset(0, 5),
+                          blurRadius: 15,
+                          offset: const Offset(0, 10),
                         ),
                       ],
                     ),
@@ -564,28 +573,55 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Image
-                        Container(
-                          width: 120,
-                          height: 160,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.blueAccent.withOpacity(0.2),
-                                spreadRadius: 1,
-                                blurRadius: 10,
-                                offset: const Offset(5, 0),
+                        Stack(
+                          children: [
+                            Container(
+                              width: 120,
+                              height: 160,
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.blueAccent.withOpacity(0.2),
+                                    spreadRadius: 1,
+                                    blurRadius: 15,
+                                    offset: const Offset(5, 5),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image(
-                              image: AssetImage(
-                                tour.imageUrl,
+                              child: Hero(
+                                tag: tour.imageUrl,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Image(
+                                    image: AssetImage(
+                                      tour.imageUrl,
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
-                              fit: BoxFit.cover,
                             ),
-                          ),
+                            Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(20),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => TourDetailScreen(
+                                        tour: tour,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: const SizedBox(
+                                  width: 120,
+                                  height: 160,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         // Description
                         Expanded(
@@ -628,11 +664,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       ],
                                     ),
-                                    SvgPicture.asset(
-                                      'assets/icons/icons8-love-outline.svg',
-                                      height: 25,
-                                      width: 25,
-                                      color: Colors.blueGrey.shade400,
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          tour.isFavorite = !tour.isFavorite;
+                                        });
+                                      },
+                                      child: SvgPicture.asset(
+                                        tour.isFavorite
+                                            ? 'assets/icons/icons8-love-fill.svg'
+                                            : 'assets/icons/icons8-love-outline.svg',
+                                        height: 25,
+                                        width: 25,
+                                        color: tour.isFavorite == true
+                                            ? Colors.blueAccent
+                                            : Colors.blueGrey.shade400,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -916,55 +963,6 @@ class _HomeScreenState extends State<HomeScreen> {
           label: 'Ticket',
         ),
       ],
-    );
-  }
-}
-
-class BuildBottomNavigation {
-  static Widget build(Size size) {
-    return Container(
-      height: 60,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 20,
-            offset: const Offset(0, -15),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          SvgPicture.asset(
-            'assets/icons/icons8-home.svg',
-            height: 30,
-            width: 30,
-            color: Colors.blueGrey.shade500,
-          ),
-          SvgPicture.asset(
-            'assets/icons/icons8-search.svg',
-            height: 30,
-            width: 30,
-            color: Colors.blueGrey.shade500,
-          ),
-          SvgPicture.asset(
-            'assets/icons/icons8-heart.svg',
-            height: 30,
-            width: 30,
-            color: Colors.blueGrey.shade500,
-          ),
-          SvgPicture.asset(
-            'assets/icons/icons8-user.svg',
-            height: 30,
-            width: 30,
-            color: Colors.blueGrey.shade500,
-          ),
-        ],
-      ),
     );
   }
 }
